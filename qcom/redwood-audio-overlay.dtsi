@@ -2,12 +2,14 @@
 
 &yupik_snd {
 	qcom,model = "lahaina-yupikidp-snd-card";
+
 	qcom,msm-mi2s-master = <1>, <1>, <1>, <1>, <1>, <1>;
 	qcom,wcn-bt = <1>;
 	qcom,mi2s-audio-intf = <1>;
 	qcom,auxpcm-audio-intf = <1>;
 	qcom,ext-disp-audio-rx = <0>;
 	qcom,afe-rxtx-lb = <0>;
+
 	qcom,audio-routing =
 		"AMIC1", "Analog Mic1",
 		"Analog Mic1", "MIC BIAS1",
@@ -44,23 +46,20 @@
 		"VA_AIF1 CAP", "VA_SWR_CLK",
 		"VA_AIF2 CAP", "VA_SWR_CLK",
 		"VA_AIF3 CAP", "VA_SWR_CLK";
+
 	qcom,msm-mbhc-hphl-swh = <1>;
 	qcom,msm-mbhc-gnd-swh = <1>;
 	qcom,wsa-max-devs = <0>;
 	qcom,swr-dmic-max-devs = <0>;
 	qcom,pri-mi2s-gpios = <&cdc_pri_tdm_gpios>;
 	qcom,msm-mbhc-usbc-audio-supported = <0>;
-//	qcom,uart-audio-sw-gpio = <&sbu_uart_en>;
-        asoc-codec  = <&stub_codec>, <&bolero>,
+        asoc-codec = <&stub_codec>, <&bolero>,
 		      <&wcd938x_codec>, <&swr_haptics>,
-		      <&wsa883x_0222>,
-		      <&ext_disp_audio_codec>;
+		      <&wsa883x_0222>, <&ext_disp_audio_codec>;
 	asoc-codec-names = "msm-stub-codec.1", "bolero_codec",
 			   "wcd938x_codec", "swr-haptics",
-			   "wsa-codec2",
-			   "msm-ext-disp-audio-codec-rx";
-	qcom,msm_audio_ssr_devs = <&audio_apr>, <&q6core>, <&lpi_tlmm>,
-				  <&bolero>;
+			   "wsa-codec2", "msm-ext-disp-audio-codec-rx";
+	qcom,msm_audio_ssr_devs = <&audio_apr>, <&q6core>, <&lpi_tlmm>, <&bolero>;
 };
 
 &q6core {
@@ -82,6 +81,10 @@
 				<0x08 0x58350222>,
 				<0x08 0x58350221>,
 				<0x08 0x58350220>;
+};
+
+&bolero {
+	qcom,num-macros = <3>;
 };
 
 &wcd938x_rx_slave {
@@ -124,24 +127,6 @@
 	status = "disabled";
 };
 
-&bolero {
-	qcom,num-macros = <3>;
-};
-
 &wsa_macro {
-	compatible = "qcom,wsa-macro";
 	status = "disabled";
 };
-
-/* 
-&soc {
-	sbu_uart_en: msm_cdc_pinctrl@9 {
-	compatible = "qcom,msm-cdc-pinctrl";
-	status = "disabled";
-	pinctrl-names = "aud_active", "aud_sleep";
-	pinctrl-0 = <&sbu_uart_en_active>;
-	pinctrl-1 = <&sbu_uart_en_idle>;
- 	#gpio-cells = <0>;
-	};
-};
- */
