@@ -1,34 +1,75 @@
-/*for redwood pinctrl */
 &tlmm {
-/*
-    sbu_uart_en_ctrl {
-		sbu_uart_en_idle: uart_audio_en_idle {
-			mux {
-				pins = "gpio91";
-				function = "gpio";
-			};
-			config {
-				pins = "gpio91";
-				drive-strength = <2>;
-				bias-pull-down;
-				output-low;
-			};
+	/* AW8697_RESET_N */
+	awinic_gpio_reset: awinic_gpio_reset {
+		mux {
+			pins = "gpio35";
+			unction = "gpio";
 		};
 
-		sbu_uart_en_active: uart_audio_en_active {
-			mux {
-				pins = "gpio91";
-				function = "gpio";
-			};
-			config {
-				pins = "gpio91";
-				drive-strength = <2>;
-				bias-disable;
-				output-high;
-			};
+		config {
+			pins = "gpio35";
+			drive-strength = <2>;
+			bias-disable;
+			output-low;
 		};
 	};
-*/
+
+	/* AW8697_RESET_N, state device active*/
+	awinic_gpio_reset_output_high: awinic_gpio_reset_output_high {
+		mux {
+			pins = "gpio35";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio35";
+			drive-strength = <2>;
+			bias-disable;
+			output-high;
+		};
+	};
+
+	/* AW8697_INTERRUPT_N */
+	awinic_gpio_int: awinic_gpio_int {
+		mux {
+			pins = "gpio18";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio18";
+			drive-strength = <2>;
+			bias-pull-up;
+			input-enable;
+		};
+	};
+
+	qupv3_se13_spi_sleep: qupv3_se13_spi_sleep {
+		mux {
+			pins = "gpio52", "gpio53", "gpio54";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio52", "gpio53", "gpio54";
+			drive-strength = <2>;
+			bias-disable;
+		};
+	};
+
+	qupv3_se13_spi_sleep_cs: qupv3_se13_spi_sleep_cs {
+		mux {
+			pins = "gpio55";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio55";
+			drive-strength = <6>;
+			bias-disable;
+			output-high;
+		};
+	};
 
 	top_smartpa_int_active: top_smartpa_int_active {
 		/* active state */
@@ -94,7 +135,7 @@
 		};
 	};
 
-        md_mode_ctrl_irq {
+	md_mode_ctrl_irq {
 		ant5_ctrl_irq: ant5_ctrl_irq {
 			mux {
 				pins = "gpio129";
